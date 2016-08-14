@@ -16,7 +16,7 @@ install:
 before_script:
   - env | sort
   - cd "$VERSION"
-  - image="appropriate/postgis:$VERSION"
+  - image="splashblot/docker-postgis:$VERSION"
 
 script:
   - docker build --pull -t "$image" .
