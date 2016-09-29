@@ -5,7 +5,6 @@ dist: trusty
 
 env:
   - VERSION=9.3-2.3
-  - VERSION=9.4-2.3
   - VERSION=9.5-2.3
   - VERSION=9.6-2.3
 
