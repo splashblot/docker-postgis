@@ -1,8 +1,8 @@
 # splashblot/postgis
 
-[![Build Status](https://travis-ci.org/appropriate/docker-postgis.svg)](https://travis-ci.org/appropriate/docker-postgis) [![Join the chat at https://gitter.im/appropriate/docker-postgis](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/appropriate/docker-postgis?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Build Status](https://travis-ci.org/splashblot/docker-postgis.svg)](https://travis-ci.org/splashblot/docker-postgis)
 
-The `splashblot/postgis` image provides a Docker container running Postgres 9 with [PostGIS 2.2](http://postgis.net/) installed. This image is based on the official [`postgres`](https://registry.hub.docker.com/_/postgres/) image and provides variants for each version of Postgres 9 supported by the base image (9.1-9.5).
+The `splashblot/postgis` image provides a Docker container running Postgres 9 with [PostGIS 2.2](http://postgis.net/) installed. This image is based on the official [`postgres`](https://registry.hub.docker.com/_/postgres/) image and provides variants for each version of Postgres 9 supported by the base image (9.1-9.5).  It is derived 99.99% from [Mike Dillon](https://github.com/md5)'s excellent work [here](https://github.com/appropriate/docker-postgis) and we simply added a bit of [CartoDB^H^H](https://github.com/CartoDB/cartodb) juice to it.
 
 This image ensures that the default database created by the parent `postgres` image will have the following extensions installed:
 
