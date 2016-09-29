@@ -1,9 +1,8 @@
-FROM postgres:9.4
+FROM postgres:9.1
 MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 
 ENV POSTGIS_MAJOR 2.2
 ENV POSTGIS_VERSION 2.2.2+dfsg-4.pgdg80+1
-ENV CDB_LATEST_VERSION 0.17.1
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
@@ -21,7 +20,6 @@ RUN apt-get update \
 # Install latest CartoDB (#FIXME?!) extension
 RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       cd cartodb-postgresql && \
-      git checkout $CDB_LATEST_VERSION  && \
       PGUSER=postgres make install
 
 RUN mkdir -p /docker-entrypoint-initdb.d
