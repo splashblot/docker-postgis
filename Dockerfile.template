@@ -11,17 +11,29 @@ RUN apt-get update \
            postgresql-server-dev-$PG_MAJOR \
            postgresql-plpython-$PG_MAJOR \
            ca-certificates \
+           python-pip \
+           python-dev \
            build-essential \
            automake \
            git-core \
            git \
       && rm -rf /var/lib/apt/lists/*
 
-# Install latest CartoDB (#FIXME?!) extension
+RUN pip install --upgrade pip
+RUN pip install --upgrade virtualenv
+
+# Install latest CartoDB (#TODO: here?) extension
 RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       cd cartodb-postgresql && \
+      PGUSER=postgres make install
+
+# Install crankshaft (#TODO: here?) extension
+RUN git clone https://github.com/CartoDB/crankshaft && \
+      cd crankshaft && \
+      git checkout develop && \
       PGUSER=postgres make install
 
 RUN mkdir -p /docker-entrypoint-initdb.d
 COPY ./01-initdb-postgis.sh /docker-entrypoint-initdb.d/01_postgis.sh
 COPY ./02-initdb-cartodb_pgsql.sh /docker-entrypoint-initdb.d/02_cartodb_pgsql.sh
+COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_crankshaft.sh
