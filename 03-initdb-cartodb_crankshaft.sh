@@ -20,5 +20,5 @@ BEGIN
 END
 $$ LANGUAGE plpgsql;
 
-CREATE EXTENSION crankshaft WITH VERSION 'dev';"
+CREATE EXTENSION crankshaft WITH VERSION 'dev';
 EOSQL
