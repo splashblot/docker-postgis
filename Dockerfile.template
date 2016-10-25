@@ -3,6 +3,7 @@ MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 
 ENV POSTGIS_MAJOR %%POSTGIS_MAJOR%%
 ENV POSTGIS_VERSION %%POSTGIS_VERSION%%
+ENV CDB_LATEST_VERSION 0.17.1
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
@@ -26,6 +27,7 @@ RUN pip install --upgrade virtualenv
 # Install latest CartoDB (#TODO: here?) extension
 RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       cd cartodb-postgresql && \
+      git checkout $CDB_LATEST_VERSION  && \
       PGUSER=postgres make install
 
 # Install crankshaft (#TODO: here?) extension
@@ -38,3 +40,4 @@ RUN mkdir -p /docker-entrypoint-initdb.d
 COPY ./01-initdb-postgis.sh /docker-entrypoint-initdb.d/01_postgis.sh
 COPY ./02-initdb-cartodb_pgsql.sh /docker-entrypoint-initdb.d/02_cartodb_pgsql.sh
 COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_crankshaft.sh
+COPY ./04-initdb-metabase.sh /docker-entrypoint-initdb.d/04_metabase.sh
