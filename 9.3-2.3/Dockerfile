@@ -3,7 +3,7 @@ MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 
 ENV POSTGIS_MAJOR 2.3
 ENV POSTGIS_VERSION 2.3.0+dfsg-2.pgdg80+1
-ENV CDB_LATEST_VERSION 0.17.1
+ENV CDB_LATEST_VERSION 0.18.2
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
