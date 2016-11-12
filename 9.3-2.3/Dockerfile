@@ -41,3 +41,4 @@ COPY ./01-initdb-postgis.sh /docker-entrypoint-initdb.d/01_postgis.sh
 COPY ./02-initdb-cartodb_pgsql.sh /docker-entrypoint-initdb.d/02_cartodb_pgsql.sh
 COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_crankshaft.sh
 COPY ./04-initdb-metabase.sh /docker-entrypoint-initdb.d/04_metabase.sh
+COPY ./05-initdb-webodm.sh /docker-entrypoint-initdb.d/05_webodm.sh
