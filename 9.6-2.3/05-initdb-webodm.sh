@@ -8,4 +8,5 @@ export PGUSER="$POSTGRES_USER"
 # Create the Metabase DB
 "${psql[@]}" <<- 'EOSQL'
 CREATE DATABASE webodm_dev;
+ALTER DATABASE webodm_dev SET postgis.gdal_enabled_drivers TO 'GTiff';
 EOSQL
