@@ -2,8 +2,8 @@ FROM postgres:9.3
 MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 
 ENV POSTGIS_MAJOR 2.3
-ENV POSTGIS_VERSION 2.3.0+dfsg-2.pgdg80+1
-ENV CDB_LATEST_VERSION 0.18.2
+ENV POSTGIS_VERSION 2.3.1+dfsg-1.pgdg80+1
+ENV CDB_LATEST_VERSION 0.18.5
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
