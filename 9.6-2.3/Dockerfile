@@ -2,8 +2,7 @@ FROM postgres:9.6
 MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 
 ENV POSTGIS_MAJOR 2.3
-ENV POSTGIS_VERSION 2.3.1+dfsg-1.pgdg80+1
-ENV CDB_LATEST_VERSION 0.18.5
+ENV POSTGIS_VERSION 2.3.2+dfsg-1~exp2.pgdg80+1
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
@@ -24,16 +23,19 @@ RUN apt-get update \
 RUN pip install --upgrade pip
 RUN pip install --upgrade virtualenv
 
-# Install latest CartoDB (#TODO: here?) extension
+# Install stable CartoDB (#TODO: here best?) extension
+ENV CDB_STABLE_VERSION 0.19.0
 RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       cd cartodb-postgresql && \
-      git checkout $CDB_LATEST_VERSION  && \
+      git checkout $CDB_STABLE_VERSION  && \
       PGUSER=postgres make install
 
-# Install crankshaft (#TODO: here?) extension
+# Install crankshaft (#TODO: here best?) extension
+# ENV CRANKSHAFT_STABLE_VERSION 0.5.1
+ENV CRANKSHAFT_LATEST_VERSION develop
 RUN git clone https://github.com/CartoDB/crankshaft && \
       cd crankshaft && \
-      git checkout develop && \
+      git checkout $CRANKSHAFT_LATEST_VERSION && \
       PGUSER=postgres make install
 
 RUN mkdir -p /docker-entrypoint-initdb.d
