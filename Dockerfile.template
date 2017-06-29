@@ -24,7 +24,7 @@ RUN pip install --upgrade pip
 RUN pip install --upgrade virtualenv
 
 # Install stable CartoDB (#TODO: here best?) extension
-ENV CDB_STABLE_VERSION 0.19.0
+ENV CDB_STABLE_VERSION 0.19.1
 RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       cd cartodb-postgresql && \
       git checkout $CDB_STABLE_VERSION  && \
