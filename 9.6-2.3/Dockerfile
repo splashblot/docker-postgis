@@ -30,8 +30,9 @@ RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       git checkout $CDB_STABLE_VERSION  && \
       PGUSER=postgres make install
 
-# Install crankshaft (#TODO: here best?) extension
-# ENV CRANKSHAFT_STABLE_VERSION 0.5.1
+# Install LATEST crankshaft (#TODO: here best?) extension
+# ENV CRANKSHAFT_STABLE_VERSION 0.5.2
+#   >>> USING _LATEST_ INSTEAD <<<
 ENV CRANKSHAFT_LATEST_VERSION develop
 RUN git clone https://github.com/CartoDB/crankshaft && \
       cd crankshaft && \
