@@ -19,6 +19,12 @@ BEGIN
    END IF;
 END
 $$ LANGUAGE plpgsql;
-
-CREATE EXTENSION crankshaft WITH VERSION 'dev';
 EOSQL
+
+# Load crankshaft into both template_database and $POSTGRES_DB
+for DB in template_postgis "$POSTGRES_DB"; do
+	echo "Loading crankshaft extensions into $DB"
+	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
+                CREATE EXTENSION crankshaft WITH VERSION 'dev';
+EOSQL
+done
