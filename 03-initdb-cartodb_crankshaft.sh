@@ -25,6 +25,7 @@ EOSQL
 for DB in template_postgis "$POSTGRES_DB"; do
 	echo "Loading crankshaft extensions into $DB"
 	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
-                CREATE EXTENSION crankshaft WITH VERSION 'dev';
+                CREATE EXTENSION IF NOT EXISTS plpythonu;
+                CREATE EXTENSION IF NOT EXISTS crankshaft WITH VERSION 'dev';
 EOSQL
 done
