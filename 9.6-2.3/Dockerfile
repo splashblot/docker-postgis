@@ -2,7 +2,7 @@ FROM postgres:9.6
 MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 
 ENV POSTGIS_MAJOR 2.3
-ENV POSTGIS_VERSION 2.3.2+dfsg-1~exp2.pgdg80+1
+ENV POSTGIS_VERSION 2.3.3+dfsg-1.pgdg80+1
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
@@ -24,7 +24,7 @@ RUN pip install --upgrade pip
 RUN pip install --upgrade virtualenv
 
 # Install stable CartoDB (#TODO: here best?) extension
-ENV CDB_STABLE_VERSION 0.19.1
+ENV CDB_STABLE_VERSION 0.19.2
 RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       cd cartodb-postgresql && \
       git checkout $CDB_STABLE_VERSION  && \
