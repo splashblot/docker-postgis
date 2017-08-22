@@ -43,6 +43,7 @@ RUN git clone https://github.com/CartoDB/crankshaft && \
       PGUSER=postgres make install
 
 RUN mkdir -p /docker-entrypoint-initdb.d
+COPY ./00-initdb-crontab.sh /docker-entrypoint-initdb.d/00_crontab.sh
 COPY ./01-initdb-postgis.sh /docker-entrypoint-initdb.d/01_postgis.sh
 COPY ./02-initdb-cartodb_pgsql.sh /docker-entrypoint-initdb.d/02_cartodb_pgsql.sh
 COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_crankshaft.sh
