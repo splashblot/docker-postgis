@@ -4,6 +4,9 @@ MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 ENV POSTGIS_MAJOR 2.3
 ENV POSTGIS_VERSION 2.3.3+dfsg-1.pgdg80+1
 
+RUN mkdir -p /data/backups
+VOLUME /data/backups
+
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
            postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION \

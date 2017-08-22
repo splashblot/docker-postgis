@@ -4,6 +4,9 @@ MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 ENV POSTGIS_MAJOR %%POSTGIS_MAJOR%%
 ENV POSTGIS_VERSION %%POSTGIS_VERSION%%
 
+RUN mkdir -p /data/backups
+VOLUME /data/backups
+
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
            postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION \
