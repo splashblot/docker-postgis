@@ -53,4 +53,5 @@ COPY ./04-initdb-metabase.sh /docker-entrypoint-initdb.d/04_metabase.sh
 COPY ./05-initdb-webodm.sh /docker-entrypoint-initdb.d/05_webodm.sh
 
 COPY docker-entrypoint.sh /usr/local/bin/
+RUN rm /docker-entrypoint.sh
 RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
