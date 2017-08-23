@@ -125,10 +125,10 @@ if [ "$1" = 'postgres' ]; then
 		echo
 		for f in /docker-entrypoint-initdb.d/*; do
 			case "$f" in
-				*.sh)     echo "$0: running initdb.d/$f"; . "$f" ;;
-				*.sql)    echo "$0: running initdb.d/$f"; "${psql[@]}" -f "$f"; echo ;;
-				*.sql.gz) echo "$0: running initdb.d/$f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
-				*)        echo "$0: ignoring initdb.d/$f" ;;
+				*.sh)     echo "$0: running initdb.d$f"; . "$f" ;;
+				*.sql)    echo "$0: running initdb.d$f"; "${psql[@]}" -f "$f"; echo ;;
+				*.sql.gz) echo "$0: running initdb.d$f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
+				*)        echo "$0: ignoring initdb.d$f" ;;
 			esac
 			echo
 		done
@@ -144,10 +144,10 @@ fi
 
 for f in /docker-entrypoint-init.d/*; do
 	case "$f" in
-		*.sh)     echo "$0: running init.d/$f"; . "$f" ;;
-		*.sql)    echo "$0: running init.d/$f"; "${psql[@]}" -f "$f"; echo ;;
-		*.sql.gz) echo "$0: running init.d/$f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
-		*)        echo "$0: ignoring init.d/$f" ;;
+		*.sh)     echo "$0: running init.d$f"; . "$f" ;;
+		*.sql)    echo "$0: running init.d$f"; "${psql[@]}" -f "$f"; echo ;;
+		*.sql.gz) echo "$0: running init.d$f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
+		*)        echo "$0: ignoring init.d$f" ;;
 	esac
 	echo
 done
