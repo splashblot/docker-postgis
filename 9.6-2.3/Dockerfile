@@ -52,6 +52,5 @@ COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_cr
 COPY ./04-initdb-metabase.sh /docker-entrypoint-initdb.d/04_metabase.sh
 COPY ./05-initdb-webodm.sh /docker-entrypoint-initdb.d/05_webodm.sh
 
-COPY docker-entrypoint.sh /usr/local/bin/
-RUN rm /docker-entrypoint.sh
-RUN ln -s usr/local/bin/docker-entrypoint.sh / # backwards compat
+COPY docker-entrypoint-cron.sh /usr/local/bin/
+RUN ln -s usr/local/bin/docker-entrypoint-cron.sh / # backwards compat
