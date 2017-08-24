@@ -29,6 +29,16 @@ fi
 
 # allow the container to be started with `--user`
 if [ "$1" = 'postgres' ] && [ "$(id -u)" = '0' ]; then
+	for f in /docker-entrypoint-init.d/*; do
+		case "$f" in
+			*.sh)     echo "$0: running init.d$f"; . "$f" ;;
+			*.sql)    echo "$0: running init.d$f"; "${psql[@]}" -f "$f"; echo ;;
+			*.sql.gz) echo "$0: running init.d$f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
+			*)        echo "$0: ignoring init.d$f" ;;
+		esac
+		echo
+    done
+
 	mkdir -p "$PGDATA"
 	chown -R postgres "$PGDATA"
 	chmod 700 "$PGDATA"
@@ -140,16 +150,6 @@ if [ "$1" = 'postgres' ]; then
 		echo 'PostgreSQL init process complete; ready for start up.'
 		echo
 	fi
-
-	for f in /docker-entrypoint-init.d/*; do
-		case "$f" in
-			*.sh)     echo "$0: running init.d$f"; . "$f" ;;
-			*.sql)    echo "$0: running init.d$f"; "${psql[@]}" -f "$f"; echo ;;
-			*.sql.gz) echo "$0: running init.d$f"; gunzip -c "$f" | "${psql[@]}"; echo ;;
-			*)        echo "$0: ignoring init.d$f" ;;
-		esac
-		echo
-    done
 fi
 
 exec "$@"
