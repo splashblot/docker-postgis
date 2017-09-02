@@ -42,6 +42,15 @@ RUN git clone https://github.com/CartoDB/crankshaft && \
       git checkout $CRANKSHAFT_LATEST_VERSION && \
       PGUSER=postgres make install
 
+# Geocoder SQL client + server
+RUN git clone https://github.com/CartoDB/data-services.git && \
+  cd /data-services/geocoder/extension && PGUSER=postgres make all install && cd / && \
+  git clone https://github.com/CartoDB/dataservices-api.git && \
+  cd /dataservices-api/server/extension && \
+  PGUSER=postgres make install && cd ../lib/python/cartodb_services && \
+  pip install -r requirements.txt && pip install . && \
+  cd ../../../../client && PGUSER=postgres make install
+
 RUN mkdir -p /docker-entrypoint-init.d
 COPY ./01-init-crontab.sh /docker-entrypoint-init.d/01_crontab.sh
 
