@@ -7,13 +7,15 @@ export PGUSER="$POSTGRES_USER"
 
 # Load geocoder into both template_database and $POSTGRES_DB
 for DB in template_postgis "$POSTGRES_DB"; do
-	echo "Loading crankshaft extensions into $DB"
+	echo "Loading geocoder into  $DB"
 	"${psql[@]}" --dbname="$DB" <<-'EOSQL'
-create extension cdb_geocoder;
-create extension plproxy;
-create extension observatory;
-create extension cdb_dataservices_server;
-create extension cdb_dataservices_client;
+CREATE EXTENSION IF NOT EXISTS plpythonu;
+CREATE EXTENSION IF NOT EXISTS cartodb;
+CREATE EXTENSION IF NOT EXISTS cdb_geocoder;
+CREATE EXTENSION IF NOT EXISTS plproxy;
+CREATE EXTENSION IF NOT EXISTS observatory;
+CREATE EXTENSION IF NOT EXISTS cdb_dataservices_server;
+CREATE EXTENSION IF NOT EXISTS cdb_dataservices_client;
 
 SELECT CDB_Conf_SetConf(
     'redis_metadata_config',

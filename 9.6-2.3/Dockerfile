@@ -14,6 +14,7 @@ RUN apt-get update \
            postgis=$POSTGIS_VERSION \
            postgresql-server-dev-$PG_MAJOR \
            postgresql-plpython-$PG_MAJOR \
+           postgresql-$PG_MAJOR-plproxy \
            ca-certificates \
            python-pip \
            python-dev \
@@ -28,7 +29,7 @@ RUN pip install --upgrade pip
 RUN pip install --upgrade virtualenv
 
 # Install rvm
-ENV PATH /usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+ENV PATH $PATH:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 #RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3 && \
 RUN gpg --keyserver hkp://http-keys.gnupg.net/ --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 && \
     curl -L https://raw.githubusercontent.com/wayneeseguin/rvm/stable/binscripts/rvm-installer | bash -s stable --ruby && \
@@ -74,7 +75,7 @@ COPY ./02-initdb-cartodb_pgsql.sh      /docker-entrypoint-initdb.d/02_cartodb_pg
 COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_crankshaft.sh
 COPY ./04-initdb-metabase.sh           /docker-entrypoint-initdb.d/04_metabase.sh
 COPY ./05-initdb-webodm.sh             /docker-entrypoint-initdb.d/05_webodm.sh
-COPY ./06-initdb-carto-geocoder.sh     /docker-entrypoint-initdb.d/06-carto-geocoder.sh
+COPY ./06-initdb-carto-geocoder.sh     /docker-entrypoint-initdb.d/06_carto_geocoder.sh
 
 COPY docker-entrypoint-cron.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint-cron.sh / # backwards compat
