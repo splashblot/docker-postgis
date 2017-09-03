@@ -66,6 +66,10 @@ RUN git clone https://github.com/CartoDB/data-services.git && \
   pip install -r requirements.txt && pip install . && \
   cd ../../../../client && PGUSER=postgres make install
 
+# Data observatory extension
+RUN git clone https://github.com/CartoDB/observatory-extension.git && \
+  cd /observatory-extension && make install
+
 RUN mkdir -p /docker-entrypoint-init.d
 COPY ./01-init-crontab.sh /docker-entrypoint-init.d/01_crontab.sh
 
