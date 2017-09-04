@@ -80,6 +80,7 @@ COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_cr
 COPY ./04-initdb-metabase.sh           /docker-entrypoint-initdb.d/04_metabase.sh
 COPY ./05-initdb-webodm.sh             /docker-entrypoint-initdb.d/05_webodm.sh
 COPY ./06-initdb-carto-geocoder.sh     /docker-entrypoint-initdb.d/06_carto_geocoder.sh
+COPY ./07-initdb-cachet.sh             /docker-entrypoint-initdb.d/07_cachet.sh
 
 COPY docker-entrypoint-cron.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint-cron.sh / # backwards compat
