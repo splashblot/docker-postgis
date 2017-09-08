@@ -79,8 +79,10 @@ COPY ./02-initdb-cartodb_pgsql.sh      /docker-entrypoint-initdb.d/02_cartodb_pg
 COPY ./03-initdb-cartodb_crankshaft.sh /docker-entrypoint-initdb.d/03_cartodb_crankshaft.sh
 COPY ./04-initdb-metabase.sh           /docker-entrypoint-initdb.d/04_metabase.sh
 COPY ./05-initdb-webodm.sh             /docker-entrypoint-initdb.d/05_webodm.sh
-COPY ./06-initdb-carto-geocoder.sh     /docker-entrypoint-initdb.d/06_carto_geocoder.sh
+COPY ./06-initdb-carto_geocoder.sh     /docker-entrypoint-initdb.d/06_carto_geocoder.sh
 COPY ./07-initdb-cachet.sh             /docker-entrypoint-initdb.d/07_cachet.sh
+COPY ./08-initdb-ag_tracker.sh         /docker-entrypoint-initdb.d/08-ag_tracker.sh
+COPY ./09-initdb-openduty.sh           /docker-entrypoint-initdb.d/09-openduty.sh
 
 COPY docker-entrypoint-cron.sh /usr/local/bin/
 RUN ln -s usr/local/bin/docker-entrypoint-cron.sh / # backwards compat

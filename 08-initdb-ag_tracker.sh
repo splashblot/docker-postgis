@@ -5,7 +5,7 @@ set -e
 # Perform all actions as $POSTGRES_USER
 export PGUSER="$POSTGRES_USER"
 
-# Create the Cachet DB
+# Create the Agroguia Track DB
 "${psql[@]}" <<- 'EOSQL'
-CREATE DATABASE cachet;
+CREATE DATABASE ag_tracker;
 EOSQL

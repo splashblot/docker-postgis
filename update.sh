@@ -23,7 +23,8 @@ for version in "${versions[@]}"; do
 		cp Dockerfile.template docker-entrypoint-cron.sh \
 		   01-init-crontab.sh \
 		   01-initdb-postgis.sh 02-initdb-cartodb_pgsql.sh 03-initdb-cartodb_crankshaft.sh \
-		   04-initdb-metabase.sh 05-initdb-webodm.sh 06-initdb-carto-geocoder.sh 07-initdb-cachet.sh \
+		   04-initdb-metabase.sh 05-initdb-webodm.sh 06-initdb-carto-geocoder.sh \
+		   07-initdb-cachet.sh 08-initdb-ag_tracker.sh 09-initdb-openduty.sh \
 		   README.md "$version/"
 		mv "$version/Dockerfile.template" "$version/Dockerfile"
 		sed -i 's/%%PG_MAJOR%%/'$pg_major'/g; s/%%POSTGIS_MAJOR%%/'$postgis_major'/g; s/%%POSTGIS_VERSION%%/'$fullVersion'/g' "$version/Dockerfile"
