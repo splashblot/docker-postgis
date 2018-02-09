@@ -9,9 +9,9 @@ VOLUME /data/backups
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
-           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION \
-           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts=$POSTGIS_VERSION \
-           postgis=$POSTGIS_VERSION \
+           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR \
+           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts \
+           postgis-2.3 \
            postgresql-server-dev-$PG_MAJOR \
            postgresql-plpython-$PG_MAJOR \
            postgresql-$PG_MAJOR-plproxy \
@@ -42,16 +42,14 @@ RUN gpg --keyserver hkp://http-keys.gnupg.net/ --recv-keys 409B6B1796C275462A170
     rm -rf /usr/local/rvm/src
 
 # Install stable CartoDB (#TODO: here best?) extension
-ENV CDB_STABLE_VERSION 0.19.2
+ENV CDB_STABLE_VERSION 0.20.0
 RUN git clone https://github.com/CartoDB/cartodb-postgresql && \
       cd cartodb-postgresql && \
       git checkout $CDB_STABLE_VERSION  && \
       PGUSER=postgres make install
 
 # Install LATEST crankshaft (#TODO: here best?) extension
-# ENV CRANKSHAFT_STABLE_VERSION 0.5.2
-#   >>> USING _LATEST_ INSTEAD <<<
-ENV CRANKSHAFT_LATEST_VERSION develop
+ENV CRANKSHAFT_STABLE_VERSION 0.6.1
 RUN git clone https://github.com/CartoDB/crankshaft && \
       cd crankshaft && \
       git checkout $CRANKSHAFT_LATEST_VERSION && \
