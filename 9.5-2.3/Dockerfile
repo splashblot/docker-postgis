@@ -18,6 +18,7 @@ RUN apt-get update \
            ca-certificates \
            python-pip \
            python-dev \
+           python-setuptools \
            build-essential \
            automake \
            git-core \
