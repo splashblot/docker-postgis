@@ -75,7 +75,7 @@ RUN apt-get -qq update && apt-get -qq -y install bzip2 \
     && curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
     && bash /tmp/miniconda.sh -bfp /usr/local \
     && rm -rf /tmp/miniconda.sh \
-    && conda install -y python=3 \
+    && conda install -y python=2 \
     && conda update conda \
     && apt-get -qq -y remove bzip2 \
     && apt-get -qq -y autoremove \
@@ -86,7 +86,10 @@ RUN apt-get -qq update && apt-get -qq -y install bzip2 \
 # Install TensorFlow & Jupyter
 RUN conda create -y -n tf \
     && /bin/bash -c "source activate tf" \
-    && pip install tensorflow \
+    && pip install tensorflow keras \
+    && pip install opencv-python numpy \
+    && pip install rasterio==0.36.0 \
+    && pip install fiona scipy \
     && pip install matplotlib xlrd \
     && pip install jupyter notebook \
     && pip install cartoframes
