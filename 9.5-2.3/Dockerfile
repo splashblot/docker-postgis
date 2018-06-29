@@ -22,6 +22,7 @@ RUN apt-get update \
            build-essential \
            automake \
            git-core \
+           libgdal-dev \
            git \
            curl \
       && rm -rf /var/lib/apt/lists/*
