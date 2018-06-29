@@ -96,7 +96,6 @@ RUN conda create -y -n tf \
     && /bin/bash -c "source activate tf" \
     && pip install tensorflow keras \
     && pip install opencv-python numpy \
-    && pip install rasterio==0.36.0 \
     && pip install fiona scipy \
     && pip install matplotlib xlrd \
     && pip install jupyter notebook \
