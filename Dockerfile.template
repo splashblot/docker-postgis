@@ -19,6 +19,7 @@ RUN apt-get update \
            python-pip \
            python-dev \
            python-setuptools \
+           libgdal-dev \
            build-essential \
            automake \
            git-core \
@@ -88,6 +89,9 @@ RUN apt-get -qq update && apt-get -qq -y install bzip2 \
 RUN conda create -y -n tf \
     && /bin/bash -c "source activate tf" \
     && pip install tensorflow \
+    && pip install rasterio==0.36.0 \
+    && pip install opencv-python \
+    && pip install fiona \
     && pip install matplotlib xlrd \
     && pip install jupyter notebook \
     && pip install cartoframes

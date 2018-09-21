@@ -9,9 +9,9 @@ VOLUME /data/backups
 
 RUN apt-get update \
       && apt-get install -y --no-install-recommends \
-           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR \
-           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts \
-           postgis-2.3 \
+           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR=$POSTGIS_VERSION \
+           postgresql-$PG_MAJOR-postgis-$POSTGIS_MAJOR-scripts=$POSTGIS_VERSION \
+           postgis=$POSTGIS_VERSION \
            postgresql-server-dev-$PG_MAJOR \
            postgresql-plpython-$PG_MAJOR \
            postgresql-$PG_MAJOR-plproxy \
@@ -19,10 +19,10 @@ RUN apt-get update \
            python-pip \
            python-dev \
            python-setuptools \
+           libgdal-dev \
            build-essential \
            automake \
            git-core \
-           libgdal-dev \
            git \
            curl \
       && rm -rf /var/lib/apt/lists/*
@@ -32,17 +32,11 @@ RUN pip install --upgrade virtualenv
 
 # Install rvm
 ENV PATH $PATH:/usr/local/rvm/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-RUN set -ex && \
-    for key in \
-        409B6B1796C275462A1703113804BB82D39DC0E3 \
-        7D2BAF1CF37B13E2069D6956105BD0E739499BDB ; \
-    do \
-        gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key" || \
-        gpg --keyserver pgp.mit.edu --recv-keys "$key" || \
-        gpg --keyserver keyserver.pgp.com --recv-keys "$key" ; \
-    done
-
-RUN curl -L https://raw.githubusercontent.com/wayneeseguin/rvm/stable/binscripts/rvm-installer | bash -s stable --ruby && \
+#RUN gpg --keyserver hkp://http-keys.gnupg.net
+#RUN gpg --keyserver hkp://pgp.mit.edu
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3 \
+                                                     7D2BAF1CF37B13E2069D6956105BD0E739499BDB && \
+    curl -L https://raw.githubusercontent.com/wayneeseguin/rvm/stable/binscripts/rvm-installer | bash -s stable --ruby && \
     echo 'source /usr/local/rvm/scripts/rvm' >> /etc/bash.bashrc && \
     /bin/bash -l -c rvm requirements && \
     echo rvm_max_time_flag=15 >> ~/.rvmrc && \
@@ -83,7 +77,7 @@ RUN apt-get -qq update && apt-get -qq -y install bzip2 \
     && curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh \
     && bash /tmp/miniconda.sh -bfp /usr/local \
     && rm -rf /tmp/miniconda.sh \
-    && conda install -y python=2 \
+    && conda install -y python=3 \
     && conda update conda \
     && apt-get -qq -y remove bzip2 \
     && apt-get -qq -y autoremove \
@@ -94,9 +88,10 @@ RUN apt-get -qq update && apt-get -qq -y install bzip2 \
 # Install TensorFlow & Jupyter
 RUN conda create -y -n tf \
     && /bin/bash -c "source activate tf" \
-    && pip install tensorflow keras \
-    && pip install opencv-python numpy \
-    && pip install fiona scipy \
+    && pip install tensorflow \
+    && pip install rasterio==0.36.0 \
+    && pip install opencv-python \
+    && pip install fiona \
     && pip install matplotlib xlrd \
     && pip install jupyter notebook \
     && pip install cartoframes
