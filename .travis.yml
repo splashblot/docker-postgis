@@ -4,6 +4,8 @@ language: bash
 dist: trusty
 
 env:
+  - VERSION=9.6-2.4
+  - VERSION=9.5-2.4
   - VERSION=9.5-2.3
 
 install:

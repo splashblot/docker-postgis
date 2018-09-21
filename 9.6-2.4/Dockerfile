@@ -2,7 +2,7 @@ FROM postgres:9.6
 MAINTAINER Juanjo Mata <juanjo.mata@gmail.com>
 
 ENV POSTGIS_MAJOR 2.4
-ENV POSTGIS_VERSION 2.4.4+dfsg-4.pgdg80+1
+ENV POSTGIS_VERSION 2.4.4+dfsg-4.pgdg90+1
 
 RUN mkdir -p /data/backups
 VOLUME /data/backups
