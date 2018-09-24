@@ -85,10 +85,9 @@ RUN apt-get -qq update && apt-get -qq -y install bzip2 \
     && rm -rf /var/lib/apt/lists/* /var/log/dpkg.log \
     && conda clean --all --yes
 
-# Install TensorFlow & Jupyter
-RUN conda create -y -n tf \
-    && /bin/bash -c "source activate tf" \
-    && pip install tensorflow \
+# Install Jupyter et al.
+RUN conda create -y -n jupyter \
+    && /bin/bash -c "source activate jupyter" \
     && pip install rasterio==0.36.0 \
     && pip install opencv-python \
     && pip install fiona \
