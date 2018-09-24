@@ -88,7 +88,8 @@ RUN apt-get -qq update && apt-get -qq -y install bzip2 \
 # Install Jupyter et al.
 RUN conda create -y -n jupyter \
     && /bin/bash -c "source activate jupyter" \
-    && pip install rasterio==0.36.0 \
+    && pip install numpy==1.15.0 \
+    && pip install rasterio==1.0.5 \
     && pip install opencv-python \
     && pip install fiona \
     && pip install matplotlib xlrd \
